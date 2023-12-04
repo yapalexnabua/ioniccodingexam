@@ -1,0 +1,11 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-horse-form *ngIf="(user$ | async)?.role === Role.Admin"></app-horse-form>
+
+  <app-horse-list></app-horse-list>
+</ion-content>

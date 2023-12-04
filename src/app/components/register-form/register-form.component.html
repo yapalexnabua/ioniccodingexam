@@ -1,0 +1,110 @@
+<form [formGroup]="fb" (ngSubmit)="submit()">
+  <ion-item class="input-item">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" formControlName="email"></ion-input>
+  </ion-item>
+
+  <div
+    *ngIf="form.email.touched && form.email.invalid"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="form.email.errors?.['required']"
+    >
+      <ion-text color="danger">Email is required</ion-text>
+    </div>
+
+    <div
+      class="error ion-padding"
+      *ngIf="form.email.errors?.['pattern']"
+    >
+      <ion-text color="danger">Please enter a valid email</ion-text>
+    </div>
+  </div>
+
+  <ion-item class="input-item">
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+
+  <div
+    *ngIf="form.password.touched && form.password.invalid"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="form.password.errors?.['required']"
+    >
+      <ion-text color="danger">Password is required</ion-text>
+    </div>
+
+    <div
+      class="error ion-padding"
+      *ngIf="form.password.errors?.['minlength']"
+    >
+      <ion-text color="danger">Please enter 8 or more characters</ion-text>
+    </div>
+  </div>
+
+  <div class="text-red-400 text-sm" *ngIf="form.password.dirty">
+    <div class="ion-padding-start ion-padding-top">
+      <ion-text>
+        <span *ngIf="form.password.value?.match('^(?=.*[A-Z])')">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </span> At least one uppercase letter.
+      </ion-text>
+    </div>
+
+    <div class="ion-padding-start">
+      <ion-text [ngClass]="{'text-primary': form.password.value?.match('(?=.*[a-z])')}">At least one lowercase letter.</ion-text>
+    </div>
+ 
+    <div class="ion-padding-start">
+      <ion-text [ngClass]="{'text-primary': form.password.value?.match('(.*[0-9].*)')}">At least one digit.</ion-text>
+    </div>
+ 
+    <div class="ion-padding-start">
+      <ion-text [ngClass]="{'text-primary': form.password.value?.match('(?=.*[!@#$%^&*])')}">At least one special character.</ion-text>
+    </div>
+ 
+    <div class="ion-padding-start">
+      <ion-text [ngClass]="{'text-primary': form.password.value?.match('.{8,}')}">At least 8 characters long.</ion-text>
+    </div>
+ 
+ </div>
+
+  <ion-item class="input-item">
+    <ion-label position="floating">Confirm Password</ion-label>
+    <ion-input type="password" formControlName="confirmPassword"></ion-input>
+  </ion-item>
+
+  <div
+    *ngIf="form.confirmPassword.touched && form.confirmPassword.invalid"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="form.confirmPassword.errors?.['required']"
+    >
+      <ion-text color="danger">Confirm password is required</ion-text>
+    </div>
+  </div>
+
+  <div 
+    class="ion-padding" 
+    *ngIf="fb.errors?.['notmatch']"
+  >
+    <ion-text color="danger">Passwords do not match</ion-text>
+  </div>
+
+  <ion-select label="Floating label" label-placement="floating" formControlName="role">
+    <ion-select-option [value]="role" *ngFor="let role of roles">{{ role }}</ion-select-option>
+  </ion-select>
+
+  <ion-button class="ion-padding" type="submit" color="danger" expand="block">Submit</ion-button>
+</form>
+
+<ion-alert
+  [isOpen]="isAlertOpen"
+  message="Please complete the form"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)"
+></ion-alert>

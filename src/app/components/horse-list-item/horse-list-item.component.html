@@ -1,0 +1,15 @@
+<ion-row class="ion-align-items-center">
+  <ion-col size="3">
+    <div [ngClass]="{'is-removed': !!horse.deleted_at}">{{ horse.name }}</div>
+  </ion-col>
+  <ion-col>
+    <ion-grid>
+      <ion-col size="3">
+        <ion-button class="ion-padding" type="submit" color="primary" expand="block">Edit</ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button class="ion-padding" type="submit" color="danger" expand="block" (click)="remove(horse.id)">Remove</ion-button>
+      </ion-col>
+    </ion-grid>
+  </ion-col>
+</ion-row>
